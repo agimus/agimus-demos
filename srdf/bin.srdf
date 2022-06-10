@@ -1,0 +1,19 @@
+<robot name="bin">
+  <handle name="handle_00" clearance="0.01">
+    <position xyz="0.14 0.15 0.05" rpy="-1.5707963267948966 1.5707963267948966 0"/>
+    <link name="bin_housing_link"/>
+    <mask>1 1 1 1 1 1</mask>
+  </handle>
+  <contact name="bottom">
+    <link name="bin_housing_link"/>
+    <point>
+       0.00  0.00 0.00
+       1.00  0.00 0.00
+       0.00  0.50 0.00
+       1.00  0.50 0.00
+    </point>
+    <shape>
+      4 3 2 1 0
+    </shape>
+  </contact>
+</robot>
