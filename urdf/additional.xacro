@@ -9,7 +9,7 @@
          - hardware_interface/VelocityJointInterface
          - hardware_interface/EffortJointInterface
    -->
-   <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
    <!-- Offset of the tip link (obtained by calibration) -->
    <xacro:arg name="tip_offset_x" default="0.0008"/>
    <xacro:arg name="tip_offset_y" default="0.0069"/>
