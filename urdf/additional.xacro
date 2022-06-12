@@ -33,19 +33,19 @@
    <link name="support_link">
      <inertial>
        <mass value="200"/>
-       <origin xyz="0 0 0.45"/>
+       <origin xyz="0 0 0.3"/>
        <inertia ixx="50"  ixy="0"  ixz="0" iyy="50" iyz="0" izz="50" />
      </inertial>
      <visual>
-       <origin xyz="-0.4 0 0.45"/>
+       <origin xyz="-0.4 0 0.3"/>
        <geometry>
-	 <box size="1.0 1.2 0.9"/>
+	 <box size="1.0 1.2 0.6"/>
        </geometry>
      </visual>
      <collision>
-       <origin xyz="-0.4 0 0.45"/>
+       <origin xyz="-0.4 0 0.3"/>
        <geometry>
-	 <box size="1.0 1.2 0.9"/>
+	 <box size="1.0 1.2 0.6"/>
        </geometry>
      </collision>
    </link>
@@ -59,7 +59,7 @@
    <joint name="robot_joint" type="fixed">
      <parent link="support_link" />
      <child link = "base_link" />
-     <origin xyz="0.0 0.0 0.90" rpy="0.0 0.0 -1.5707963" />
+     <origin xyz="0.0 0.0 0.6" rpy="0.0 0.0 -1.5707963" />
    </joint>
 
    <joint name="ee_fixed_joint" type="fixed">

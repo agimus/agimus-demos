@@ -16,7 +16,7 @@
   <arg name="paused" default="false" doc="Starts gazebo in paused mode" />
   <arg name="gui" default="true" doc="Starts gazebo gui" />
   <arg name="debug" default="false"/>
-  <arg name="part" default="plaque-tubes-with-table"/>
+  <arg name="part" default="bin"/>
   <arg name="part_pose" default="-x 1.3 -y 0 -z 0 -Y -1.57079632679"/>
   <arg name="slower" default="false"/>
 
@@ -42,7 +42,7 @@
   </group>
 
   <!-- send robot urdf to param server -->
-  <include file="$(find agimus_demos)/launch/ur10_pointing_ur10_upload.launch">
+  <include file="$(find agimus_demos)/launch/ur10_bin_picking_ur10_upload.launch">
   </include>
 
   <rosparam command="load" file="$(find agimus_demos)/ur10/config/pid.yaml"/>

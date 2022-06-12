@@ -7,7 +7,7 @@
   <!-- whether the demonstration is run in simulation or on the real robot -->
   <arg name="simulation" default="false"/>
   <!-- YAML file that describes the demonstration: robots, objects-->
-  <arg name="part" default="bin"/>
+  <arg name="part" default="plaque-tubes-with-table"/>
 
   <include file="$(find agimus_demos)/launch/ur10_pointing_world_setup.launch">
     <arg name="part" value="$(arg part)"/>

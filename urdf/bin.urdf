@@ -4,7 +4,7 @@
   <joint name="bin_fixed_joint" type="fixed">
     <parent link="base_link"/>
     <child link="bin_housing_link"/>
-    <origin xyz="0.1 -0.1 0"/>
+    <origin xyz="0.1 -0.1 0" rpy="0 -3.14159 0"/>
   </joint>
 
   <link name="bin_housing_link">
@@ -16,7 +16,7 @@
 	       izz="0.001" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 3.14159 0" />
       <geometry>
         <mesh filename="package://agimus_demos/meshes/HOUSING-01.stl"/>
       </geometry>
@@ -25,7 +25,7 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 3.14159 0" />
       <geometry>
         <mesh filename="package://agimus_demos/meshes/HOUSING-01.stl"/>
       </geometry>

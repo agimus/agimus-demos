@@ -26,7 +26,7 @@
    <!-- Offset of the tip link (obtained by calibration) -->
    <xacro:arg name="tip_offset_x" default="0.0008"/>
    <xacro:arg name="tip_offset_y" default="0.0069"/>
-   <xacro:arg name="tip_offset_z" default="-0.0083"/>
+   <xacro:arg name="tip_offset_z" default="0.24"/>
 
    <link name="wall_link">
      <collision>
@@ -46,19 +46,19 @@
     <link name="support_link">
       <inertial>
         <mass value="200"/>
-        <origin xyz="0 0 0.45"/>
+        <origin xyz="0 0 0.3"/>
         <inertia ixx="50"  ixy="0"  ixz="0" iyy="50" iyz="0" izz="50" />
       </inertial>
       <visual>
-        <origin xyz="-0.4 0 0.45"/>
+        <origin xyz="-0.4 0 0.3"/>
         <geometry>
-	        <box size="1.0 1.2 0.9"/>
+	        <box size="1.0 1.2 0.6"/>
         </geometry>
       </visual>
       <collision>
-        <origin xyz="-0.4 0 0.45"/>
+        <origin xyz="-0.4 0 0.3"/>
         <geometry>
-	        <box size="1.0 1.2 0.9"/>
+	        <box size="1.0 1.2 0.6"/>
         </geometry>
       </collision>
     </link>
@@ -72,7 +72,7 @@
     <joint name="robot_joint" type="fixed">
       <parent link="support_link" />
       <child link = "base_link" />
-      <origin xyz="0.0 0.0 0.90" rpy="0.0 0.0 -1.5707963" />
+      <origin xyz="0.0 0.0 0.60" rpy="0.0 0.0 -1.5707963" />
     </joint>
 
     <joint name="ee_fixed_joint" type="fixed">
@@ -137,22 +137,22 @@
      </inertial>
      <!-- Tool support -->
      <visual>
-       <origin xyz="0 0 0" rpy="0 0 0" />
+       <origin xyz="0 0 0" rpy="0 3.14159265359 0" />
        <geometry>
-         <mesh filename="package://agimus_demos/meshes/ur10e_tip.stl"/>
+         <mesh filename="package://agimus_demos/meshes/gripper00.stl"/>
        </geometry>
        <material name="Red">
          <color rgba="0.9 0.1 0.1 1.0"/>
        </material>
      </visual>
      <collision>
-       <origin xyz="0 0 0" rpy="0 0 0" />
+       <origin xyz="0 0 0" rpy="0 3.14159265359 0" />
        <geometry>
-         <mesh filename="package://agimus_demos/meshes/ur10e_tip.stl"/>
+         <mesh filename="package://agimus_demos/meshes/gripper00.stl"/>
        </geometry>
      </collision>
      <!-- wooden spike -->
-     <visual>
+     <!--<visual>
        <origin xyz="0 0 0.113" rpy="0 0 0" />
        <geometry>
 	 <cylinder radius="0.0015" length="0.25"/>
@@ -166,7 +166,7 @@
        <geometry>
 	 <cylinder radius="0.0015" length="0.25"/>
        </geometry>
-     </collision>
+     </collision>-->
    </link>
 
    <joint name="ur10e_tool_joint" type="fixed">
