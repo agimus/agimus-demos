@@ -3,7 +3,7 @@ demo:
     ur10e:
       srdf:
         package: agimus_demos
-        file: srdf/bin.srdf
+        file: srdf/ur10_robot.srdf
   objects:
     part:
       urdf:

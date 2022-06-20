@@ -15,6 +15,6 @@ to describe the robot with end effector and sensors. -->
   <arg name="safety_k_position" default="20" doc="Used to set k position in the safety controller" />
 
   <!-- use common launch file and pass all arguments to it -->
-  <include file="$(find agimus_demos)/launch/ur10_pointing_load_ur.launch"
+  <include file="$(find agimus_demos)/launch/ur10_bin-picking_load_ur.launch"
 	   pass_all_args="true"/>
 </launch>

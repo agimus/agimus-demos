@@ -5,12 +5,20 @@
     <mask>1 1 1 1 1 1</mask>
   </handle>
   <contact name="bottom">
-    <link name="bin_housing_link"/>
+  <!--can use tf.py to tf the link-->
+    <!--<link name="bin_housing_link"/>
     <point>
        0.00  0.00  0.0
        1.00  0.00  0.0
        0.00  1.00  0.0
-       1.00  1.00  0.0
+       1.00  1.00  0.0-->
+    <link name="base_link"/>
+    <point>
+
+        0.10  -0.10  0.0
+       -0.90  -0.10  0.0
+        0.10   0.90  0.0
+       -0.90   0.90  0.0
     </point>
     <shape>
       4 3 2 1 0

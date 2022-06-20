@@ -16,7 +16,7 @@ INSTALL(FILES
   pointing/demo-april-tag-plank.yaml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/ur10/pointing
   )
-INSTALL_DEMO_LAUNCH_FILES(bin_picking
+INSTALL_DEMO_LAUNCH_FILES(bin-picking
   LAUNCHFILES
   demo.launch
   load_ur.launch
@@ -27,8 +27,8 @@ INSTALL_DEMO_LAUNCH_FILES(bin_picking
   )
 
 INSTALL(FILES
-  bin_picking/supervisor.py
-  bin_picking/bin.yaml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/ur10/bin_picking
+  bin-picking/supervisor.py
+  bin-picking/demo-bin.yaml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/ur10/bin-picking
   )
 INSTALL(DIRECTORY config DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/ur10)

@@ -42,7 +42,7 @@
   </group>
 
   <!-- send robot urdf to param server -->
-  <include file="$(find agimus_demos)/launch/ur10_bin_picking_ur10_upload.launch">
+  <include file="$(find agimus_demos)/launch/ur10_bin-picking_ur10_upload.launch">
   </include>
 
   <rosparam command="load" file="$(find agimus_demos)/ur10/config/pid.yaml"/>

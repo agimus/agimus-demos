@@ -85,7 +85,9 @@ def makeSupervisorWithFactory(robot):
     srdf = {}
     # retrieve objects from ros param
     demoDict = rospy.get_param("/demo")
+    print('demoDict',demoDict ) 
     robotDict = demoDict["robots"]
+    print('robotDic',robotDict)
     if len(robotDict) != 1:
         raise RuntimeError("One and only one robot is supported for now.")
     objectDict = demoDict["objects"]
