@@ -14,15 +14,13 @@ include(cmake/python.cmake)
 compute_project_args(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 
-add_project_dependency (dynamic-graph-python 4 REQUIRED)
-add_project_dependency (dynamic_graph_bridge 3 REQUIRED)
+OPTION (USE_SOT "Wether to trigger dependency to the Stack Of Tasks" OFF)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+if(USE_SOT)
+  add_project_dependency (dynamic-graph-python 4 REQUIRED)
+  add_project_dependency (dynamic_graph_bridge 3 REQUIRED)
+endif()
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roslaunch
 )
