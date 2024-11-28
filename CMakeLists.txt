@@ -21,37 +21,8 @@ if(USE_SOT)
   add_project_dependency (dynamic_graph_bridge 3 REQUIRED)
 endif()
 
-find_package(catkin REQUIRED COMPONENTS
-  roslaunch
-)
-
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES agimus_demos
-#  CATKIN_DEPENDS roslaunch
-#  DEPENDS system_lib
-)
+findpython()
 find_package(Eigen3)
-
-MACRO(INSTALL_DEMO_LAUNCH_FILES ROBOT DEMO)
-  set(options)
-  set(oneValueArgs)
-  set(multiValueArgs LAUNCHFILES SCRIPTS)
-  cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  MESSAGE(STATUS "Add demonstration ${ROBOT}/${DEMO}")
-  FOREACH (launch_file ${ARG_LAUNCHFILES})
-    install(FILES
-      ${PROJECT_SOURCE_DIR}/${ROBOT}/${DEMO}/${launch_file}
-      DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
-      RENAME ${ROBOT}_${DEMO}_${launch_file}
-    )
-  ENDFOREACH ()
-  FOREACH (script_file ${ARG_SCRIPTS})
-    install(PROGRAMS "${DEMO}/${script_file}"
-      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-      RENAME ${ROBOT}_${DEMO}_${script_file})
-  ENDFOREACH ()
-ENDMACRO()
 
 OPTION(USE_FRANKA "Install files for franka robot" OFF)
 OPTION(USE_TALOS "Install files for talos robot" OFF)
@@ -84,14 +55,14 @@ add_subdirectory(src)
 
 # Install other files with the same hierarchy as here.
 install(DIRECTORY urdf srdf meshes worlds
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
   FILES_MATCHING
   PATTERN "*"
   PATTERN "*.launch" EXCLUDE
 )
 
 INSTALL(FILES plugin.xml
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
 
 install(PROGRAMS
   scripts/gazebo_object_to_tf.py
@@ -104,4 +75,4 @@ install(PROGRAMS
   scripts/rqt_tooltip_calibration
   scripts/rqt_contact_calibration
   scripts/rqt_camera_calibration
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/scripts)
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/scripts)
