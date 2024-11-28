@@ -24,7 +24,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import rospy, sys
+import rclpy, sys
 from math import sqrt, pi
 import hpp_idl
 from pinocchio import XYZQUATToSE3, SE3ToXYZQUAT
@@ -34,7 +34,7 @@ from hpp.corbaserver import wrap_delete
 from hpp.corbaserver import loadServerPlugin
 from agimus_hpp.plugin import Client as AgimusHppClient
 import numpy as np
-import tf2_ros, rospy
+import tf2_ros, rclpy
 from hpp.gepetto import PathPlayer
 from std_msgs.msg import Empty as EmptyMsg, Bool, Int32, UInt32, String
 import time
@@ -53,7 +53,7 @@ rosNodeStarted = False
 
 def initRosNode():
     if not rosNodeStarted:
-        rospy.init_node("hpp", disable_signals=True)
+        rclpy.init_node("hpp", disable_signals=True)
 
 def isYes(res):
     YES = ['y', 'yes']
@@ -538,13 +538,13 @@ class PathGenerator(object):
     def setPublishers(self):
         # Topic to publish which path to execute
         PathExecutionTopic = "/agimus/start_path"
-        self.path_execution_publisher = rospy.Publisher(
+        self.path_execution_publisher = rclpy.Publisher(
                 PathExecutionTopic, UInt32, queue_size=1)
 
         # Topic publishing the status of the path execution
         StatusRunningTopic = "/agimus/status/running"
         self.path_ready = False
-        rospy.Subscriber (StatusRunningTopic,
+        rclpy.Subscriber (StatusRunningTopic,
                     Bool, self.callback_statusRunningTopics)
 
         # Parameter setting the level of steps for the path execution
@@ -552,14 +552,14 @@ class PathGenerator(object):
 
         # Topic publishing the execution of the next step
         StepTopic = "/agimus/step"
-        self.step_publisher = rospy.Publisher(
+        self.step_publisher = rclpy.Publisher(
             StepTopic, EmptyMsg, queue_size=1)
 
         # Topic publishing the status of the steps execution
         StatusWaitStepByStepTopic = "/agimus/status/is_waiting_for_step_by_step"
         self.step_ready = False
 
-        self.subs_status_stepbystep = rospy.Subscriber (StatusWaitStepByStepTopic,
+        self.subs_status_stepbystep = rclpy.Subscriber (StatusWaitStepByStepTopic,
                     Bool, self.callback_statusStepByStep)
 
     def callback_statusStepByStep(self, msg):
@@ -570,7 +570,7 @@ class PathGenerator(object):
 
     def demo_execute(self, pid):
         # Set step level parameter to zero
-        rospy.set_param(self.StepByStepParam, 0)
+        rclpy.set_param(self.StepByStepParam, 0)
         # Execute path
         self.path_execution_publisher.publish(pid)
         # Wait for path to finish
@@ -579,7 +579,7 @@ class PathGenerator(object):
         return True
 
     def demo_executeWithSteps(self, pid):
-        rospy.set_param(self.StepByStepParam, 3)
+        rclpy.set_param(self.StepByStepParam, 3)
         while not self.path_ready: #TODO
             res = input("Execute next step ? (y)es, (n)o, (q)uit : ")
             if 'q' in res.lower():
@@ -683,7 +683,7 @@ class RosInterface(object):
         from sensor_msgs.msg import JointState
         q = q0[:]
         # Acquire robot state
-        msg = rospy.wait_for_message("/joint_states", JointState, timeout)
+        msg = rclpy.wait_for_message("/joint_states", JointState, timeout)
         for ni, qi in zip(msg.name, msg.position):
             jni = self.robotPrefix + ni
             if self.robot.getJointConfigSize(jni) != 1:
@@ -723,7 +723,7 @@ class RosInterface(object):
                                (q0, [self.robotPrefix + cameraFrame])[0])
             try:
                 _cMo = self.tfBuffer.lookup_transform(cameraFrame, objectFrame,
-                        rospy.Time(), rospy.Duration(timeout))
+                        rclpy.Time(), rclpy.Duration(timeout))
                 _cMo = _cMo.transform
                 # renormalize quaternion
                 x = _cMo.rotation.x
