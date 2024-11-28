@@ -32,7 +32,6 @@ from agimus_demos import InStatePlanner
 from hpp import Transform
 from hpp.corbaserver import wrap_delete
 from hpp.corbaserver import loadServerPlugin
-from agimus_hpp.plugin import Client as AgimusHppClient
 import numpy as np
 import tf2_ros, rclpy
 from hpp.gepetto import PathPlayer
@@ -81,20 +80,6 @@ class PathGenerator(object):
         self.graphValidation = None
         if self.ros:
             self.setPointCloud()
-
-    def setPointCloud(self, lower_distance=0.25, upper_distance=1):
-        loadServerPlugin('corbaserver', 'agimus-hpp.so')
-        cl = AgimusHppClient()
-        self.pcl = cl.server.getPointCloud()
-        self.pcl.setDistanceBounds(lower_distance,upper_distance)
-        self.pcl.initializeRosNode('agimus_hpp_pcl', False)
-
-    def setObjectPlan(self):
-        # Get 3 holes on the plaque plan, in the object frame (part/root_joint)
-        hole_1 = self.robot.getHandlePositionInJoint('part/handle_40')[1]
-        hole_2 = self.robot.getHandlePositionInJoint('part/handle_06')[1]
-        hole_3 = self.robot.getHandlePositionInJoint('part/handle_31')[1]
-        self.pcl.setObjectPlan(hole_1, hole_2, hole_3)
 
     def setObjectPlanMargin(self, margin):
         self.pcl.setObjectPlanMargin(margin)
